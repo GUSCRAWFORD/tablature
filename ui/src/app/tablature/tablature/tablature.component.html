@@ -1,0 +1,31 @@
+
+
+
+<div #tablatureContainer [ngClass]="{debug:tablature.debug}"
+[ngStyle]="{
+  width:view.page.width+view.page.units,
+  height:view.page.height+view.page.units
+}"
+  class="tablature-container">
+  <!-- <p *ngIf="tablature.debug" class="debug debug-container">
+    tablature works! (debug: {{tablature.debug}}, focused: {{view.focused}})
+    <select multiple="true">
+      <option *ngFor="let i of keyBuffer">{{i.key}}</option>
+    </select>
+  </p> -->
+  <fieldset class="centered" [ngStyle]="{width:((docWidth+1)*view.note.width)+'px'||null}">
+    <input #tabName type="text" [value]="view.name" (change)="setName(tabName.value)"
+    (focus)="view.focused.name=true"
+    (blur)="view.focused.name=false">
+  </fieldset>
+  <div tabindex="0"
+  (keydown)="handleKeyboard($event)"
+  (click)="keyBuffer=[]"
+  (focus)="view.focused.tab = true"
+  (blur)="view.focused.tab = false">
+    <div class="centered" [ngStyle]="{width:((docWidth+1)*view.note.width)+'px'||null}">
+
+      <app-strings [view]="view"></app-strings>
+    </div>
+  </div>
+</div>

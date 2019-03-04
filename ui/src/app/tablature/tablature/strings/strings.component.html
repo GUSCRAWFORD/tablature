@@ -1,0 +1,20 @@
+<ng-container *ngIf="view">
+
+<div *ngFor="let lineKey of lineKeys; index as line;">
+  <!-- <div *ngFor="let string of view.tuning; index as n;" class="string">
+    <app-string [view]="view" [number]="n" lineLabel="tab"></app-string>
+  </div> -->
+  <div *ngFor="let string of view.tuning; index as n;" class="string-container">
+    <!-- <div class="string-label" [ngStyle]="{width:view.note.width+view.page.units}">
+      <ng-container *ngIf="view.strings.labels">
+        <ng-container *ngIf="view.strings.labels===options.strings.labels.tuning">{{string}}</ng-container>
+        <ng-container *ngIf="view.strings.labels===options.strings.labels.number">{{n}}</ng-container>
+      </ng-container>
+    </div> -->
+    <div class="string">
+      <app-string [view]="view" [number]="n" [from]="lineKeyAsIndex(lineKey)" [to]="lineKeyAsIndex(lineKey)+lines.hash[lineKey].length"></app-string>
+
+    </div>
+  </div>
+</div>
+</ng-container>

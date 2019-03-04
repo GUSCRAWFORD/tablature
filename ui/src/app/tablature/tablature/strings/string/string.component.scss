@@ -1,0 +1,68 @@
+.string {
+    cursor:text;
+    display:inline-flex;
+    position: relative;
+    &.label {
+        left:3px;
+    }
+    &.active {
+        //background: green;
+        // border-top: 1px dashed orangered;
+        // border-bottom: 1px dashed orangered;
+        .left,.right, .blank {
+            //background: red;
+            border-bottom: 2px solid orangered;
+            left:-1px;
+        }
+    }
+    // border-top: 1px dashed rgba(255,255,255,0);
+    // border-bottom: 1px dashed rgba(255,255,255,0);
+    .left,.right, .blank {
+        //background: red;
+        border-bottom: 1px solid black;
+        display: inline-block;
+        position: relative;
+        flex-grow: 1;
+        left:-1px;
+    }
+    .measure-break {
+        position: relative;
+        border-right: 1px solid black;
+    left: px;
+    }
+    .line-start {
+        position: relative;
+        border-left: 1px solid black;
+    }
+    .note {
+        display:inline-block;
+        text-align: center;
+        span {
+            span {
+                margin:auto;
+            }
+        }
+        .active {
+            position: absolute;
+            border: 2px solid orangered;
+        }
+    }
+    
+}
+:host {
+    height: auto;
+}
+.tab {
+    display:flex;
+    position: absolute;
+    top:0px;
+    left:0px;
+    .text {
+        margin: auto;
+        text-align: center;
+        div {
+            font-weight: bold;
+            font-size: 12pt;
+        }
+    }
+}
