@@ -1,0 +1,12 @@
+.bend {
+    cursor:text;
+    display:inline-flex;
+    position: relative;
+    left:-1px;
+    font-size:10pt;
+    .inner {
+        position:absolute;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+    }
+}

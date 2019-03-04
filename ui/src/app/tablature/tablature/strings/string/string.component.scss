@@ -12,7 +12,7 @@
         .left,.right, .blank {
             //background: red;
             border-bottom: 2px solid orangered;
-            left:-1px;
+            //left:-1px;
         }
     }
     // border-top: 1px dashed rgba(255,255,255,0);
@@ -23,12 +23,11 @@
         display: inline-block;
         position: relative;
         flex-grow: 1;
-        left:-1px;
     }
     .measure-break {
         position: relative;
         border-right: 1px solid black;
-    left: px;
+        width:0px;
     }
     .line-start {
         position: relative;
@@ -40,6 +39,7 @@
         span {
             span {
                 margin:auto;
+                font-size:10pt;
             }
         }
         .active {

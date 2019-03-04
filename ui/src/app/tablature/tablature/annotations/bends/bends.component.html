@@ -1,0 +1,21 @@
+
+<div class="bend" [ngStyle]="{width:view.note.width+view.page.units,height:view.note.height+view.page.units}">
+</div>
+
+<div class="bend"
+[ngStyle]="{
+    width:view.note.width+view.page.units,
+    height:view.note.height+view.page.units
+}"
+(click)="view.cursor.note = n+from;view.cursor.string=number;"
+[ngClass]="{active:view.cursor.string===number && view.focused.tab}"
+*ngFor="let note of (view.tablature.notes | tablatureLine : from : to); index as n;">
+full
+  <div class="inner" [ngStyle]="{
+    width:view.note.width+'px',
+    height:(view.note.height)+'px',
+    'border-bottom-right-radius':view.note.width+'px',
+    'top':view.note.height+'px',
+    'left':view.note.width+'px'
+  }"></div>
+</div>

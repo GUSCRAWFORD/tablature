@@ -26,7 +26,7 @@ export class StringComponent implements OnInit {
       width: (bubble)+this.view.page.units,
       height: (bubble)+this.view.page.units,
       top:0+this.view.page.units,
-      left:0+this.view.page.units,
+      left:2+this.view.page.units,
       'border-radius':(bubble)+this.view.page.units
   }
   }

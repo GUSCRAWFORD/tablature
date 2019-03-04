@@ -44,7 +44,7 @@
         class="active"
         [ngStyle]="activeBubbleStyle">&nbsp;</span>
         <span *ngIf="note.strings[number]">
-            <span style="font-size:10pt;">{{note.strings[number]}}</span>
+            <span>{{note.strings[number]}}</span>
         </span>
     </div>
     <div *ngIf="!note.strings[number]" class="blank" [ngStyle]="{height:(view.note.height/2)+view.page.units}"></div>
@@ -53,6 +53,7 @@
     [ngStyle]="{
         top: (view.note.height / 2)+view.page.units,
         height: (view.note.height)+view.page.units,
-        'border-right-width':from+n===view.tablature.notes.length-1?'3px':'1px'
-    }"></div>
+        'border-right-width':((from+n)===(view.tablature.notes.length-1))?'3px':'1px',
+        width:'1px'
+    }">&nbsp;{{((from+n)===(view.tablature.notes.length-1))|log}}</div>
 </div>
