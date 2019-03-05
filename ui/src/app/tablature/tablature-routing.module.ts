@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path:':name',
     component: TablatureViewComponent
-  }
+  },
+  { path:'/tablature', redirectTo:'/tablature/new', 'pathMatch':'full' }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TablatureService} from 'src/app/ui/tablature/tablature.service';
-import { TablatureView } from 'src/app/ui/tablature/tablature.model';
+import { TablatureView, TablatureCursor } from 'src/app/ui/tablature/tablature.model';
 
 @Component({
   selector: 'app-tablature-view',
@@ -22,6 +22,8 @@ export class TablatureViewComponent implements OnInit {
           this.view = this.tablature.view[newRouteParams.name] || (this.tablature.view[newRouteParams.name] = new TablatureView()); // || couldn't find the tab...
         }
         else this.view = new TablatureView();
+        this.view.focused.tab = false;
+        if (!this.view.hot) this.view.hot = new TablatureCursor();
       }
     )
   }

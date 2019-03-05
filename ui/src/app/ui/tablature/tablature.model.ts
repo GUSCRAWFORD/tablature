@@ -7,6 +7,7 @@ export const NOTE = {width:20,height:18};
  * @property strings {string[]} The set of all strings on the instrument being played and their position / accenture etc
  */
 export class Chord {
+  technique?: { [key:string]:{ [key:string]:Technique[] }};
   constructor(...args:any[]) {
     var chord = { strings: [] };
     args.forEach((arg, n)=>{
@@ -37,6 +38,11 @@ export class Chord {
     })
   }
 }
+export class Technique {
+}
+export class Bend extends Technique {
+  strength: number = 0;
+}
 /**
  * 0 or more meaasures of 0 or more strings being played
  * @property notes {Chord[]} The set of all strings and positions in a sequence that may or may not be a song
@@ -57,6 +63,7 @@ export class TablatureView {
   };
   name: string = DEFAULT_NEW_TAB_NAME;
   cursor: TablatureCursor = new TablatureCursor();
+  hot: TablatureCursor = new TablatureCursor();
   tablature: Tablature = new Tablature();
   tuning: string[] = TablatureView.options.tunings.standard;
   page = {
@@ -64,7 +71,7 @@ export class TablatureView {
     width:TablatureView.options.page.width.px,
     height:TablatureView.options.page.height.px,
     notesPerLine:0
-  }
+  };
   note = {
     width: NOTE.width,
     height: NOTE.height

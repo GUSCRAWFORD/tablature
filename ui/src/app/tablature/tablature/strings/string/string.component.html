@@ -1,6 +1,9 @@
 <!-- TAB -->
 <div class="string label" [ngStyle]="{width:view.note.width+view.page.units,height:view.note.height+view.page.units}"
-[ngClass]="{active:view.cursor.string===number && view.focused.tab}">
+[ngClass]="{
+    active:view.cursor.string===number  && view.cursor.note >= from && view.cursor.note <= to && view.focused.tab,
+    hot:view.hot&&view.hot.string===number && view.hot.note >= from && view.hot.note <= to
+}">
     <div class="left" [ngStyle]="{height:(view.note.height/2)+view.page.units}">&nbsp;</div>
     <div class="note">
         <span [hidden]="!(view.cursor.note===n+from && view.cursor.string===number && view.focused.tab)"
@@ -14,7 +17,7 @@
     [ngStyle]="{
         top: (view.note.height / 2)+view.page.units,
         height: (view.note.height)+view.page.units,
-        left:(0-view.note.width)+view.page.units,
+        left:(0)+view.page.units,
         'border-left-width':from===0?'3px':'1px'
     }"></div>
     <ng-container *ngIf="lineLabel && !number">
@@ -36,12 +39,19 @@
     height:view.note.height+view.page.units
 }"
 (click)="view.cursor.note = n+from;view.cursor.string=number;"
-[ngClass]="{active:view.cursor.string===number && view.focused.tab}"
+(mousemove)="view.hot?view.hot.note = n+from:null;view.hot?view.hot.string=number:null;"
+[ngClass]="{
+    active:view.cursor.string===number && view.cursor.note >= from && view.cursor.note <= to && view.focused.tab,
+    hot:view.hot&&view.hot.string===number && view.hot.note >= from && view.hot.note <= to
+}"
 *ngFor="let note of (view.tablature.notes | tablatureLine : from : to); index as n;">
     <div class="left" [ngStyle]="{height:(view.note.height/2)+view.page.units}">&nbsp;</div>
     <div class="note">
         <span [hidden]="!(view.cursor.note===n+from && view.cursor.string===number && view.focused.tab)"
         class="active"
+        [ngStyle]="activeBubbleStyle">&nbsp;</span>
+        <span [hidden]="!(view.hot&&view.hot.note===n+from && view.hot.string===number)"
+        class="hot"
         [ngStyle]="activeBubbleStyle">&nbsp;</span>
         <span *ngIf="note.strings[number]">
             <span>{{note.strings[number]}}</span>
@@ -52,8 +62,9 @@
     <div class="measure-break" *ngIf="!((n+from+1)%view.signature.notes) && number!=(view.tuning.length-1)"
     [ngStyle]="{
         top: (view.note.height / 2)+view.page.units,
+        left:(view.note.width)+view.page.units,
         height: (view.note.height)+view.page.units,
-        'border-right-width':((from+n)===(view.tablature.notes.length-1))?'3px':'1px',
+        'border-left-width':((from+n)===(view.tablature.notes.length-1))?'3px':'1px',
         width:'1px'
-    }">&nbsp;{{((from+n)===(view.tablature.notes.length-1))|log}}</div>
+    }"></div>
 </div>

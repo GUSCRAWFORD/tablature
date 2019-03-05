@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { TablatureService } from 'src/app/ui/tablature/tablature.service';
-import { TablatureView } from 'src/app/ui/tablature/tablature.model';
+import { TablatureView, Bend } from 'src/app/ui/tablature/tablature.model';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -70,8 +70,26 @@ export class TablatureComponent implements OnInit {
         ctrl.keyBuffer = [];
       }
     },
+    "b":(c:TablatureComponent, $e)=>{
+      this.keyBuffer.push("b");
+    },
     "ArrowUp":(c:TablatureComponent, $e)=>{
-      c.view.cursor.string?c.view.cursor.string--:c.view.cursor.string;
+      var fingering = c.view.tablature.notes[c.view.cursor.note].strings[c.view.cursor.string];
+      if (this.keyBuffer[0] && this.keyBuffer[0] === "b" && fingering) {
+        if (!c.view.tablature.notes[c.view.cursor.note].technique)
+          c.view.tablature.notes[c.view.cursor.note].technique = {};
+        if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string])
+          c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string] = {};
+          console.log(c.view.tablature.notes[c.view.cursor.note])
+        if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering])
+          c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering] = [];
+        if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering][0])
+          c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering].push(
+            new Bend()
+          );
+        (c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering][0] as Bend).strength += 0.25; 
+        console.log(c.view.tablature.notes[c.view.cursor.note].technique)
+      } else c.view.cursor.string?c.view.cursor.string--:c.view.cursor.string;
       this.keyBuffer = [];
     },
     "ArrowDown":(c:TablatureComponent, $e)=>{

@@ -5,7 +5,8 @@ const routes: Routes = [
   {
     path:'tablature',
     loadChildren: './tablature/tablature.module#TablatureModule'
-  }
+  },
+  { path: '', redirectTo:'/tablature/new', pathMatch:'full' }
 ];
 
 @NgModule({

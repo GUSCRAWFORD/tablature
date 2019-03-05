@@ -11,7 +11,17 @@
         // border-bottom: 1px dashed orangered;
         .left,.right, .blank {
             //background: red;
-            border-bottom: 2px solid orangered;
+            border-bottom: 2px solid CadetBlue;
+            //left:-1px;
+        }
+    }
+    &.hot {
+        //background: green;
+        // border-top: 1px dashed orangered;
+        // border-bottom: 1px dashed orangered;
+        .left,.right, .blank {
+            //background: red;
+            border-bottom: 2px solid Chocolate;
             //left:-1px;
         }
     }
@@ -25,12 +35,12 @@
         flex-grow: 1;
     }
     .measure-break {
-        position: relative;
-        border-right: 1px solid black;
+        position: absolute;
+        border-left: 1px solid black;
         width:0px;
     }
     .line-start {
-        position: relative;
+        position: absolute;
         border-left: 1px solid black;
     }
     .note {
@@ -44,7 +54,11 @@
         }
         .active {
             position: absolute;
-            border: 2px solid orangered;
+            border: 2px solid CadetBlue;
+        }
+        .hot {
+            position: absolute;
+            border: 2px solid Chocolate;
         }
     }
     
