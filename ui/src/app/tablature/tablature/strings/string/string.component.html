@@ -39,12 +39,41 @@
     height:view.note.height+view.page.units
 }"
 (click)="view.cursor.note = n+from;view.cursor.string=number;"
-(mousemove)="view.hot?view.hot.note = n+from:null;view.hot?view.hot.string=number:null;"
+(mousemove)="heat(n, number)"
+(mouseout)="cool(n, number)"
 [ngClass]="{
     active:view.cursor.string===number && view.cursor.note >= from && view.cursor.note <= to && view.focused.tab,
     hot:view.hot&&view.hot.string===number && view.hot.note >= from && view.hot.note <= to
 }"
 *ngFor="let note of (view.tablature.notes | tablatureLine : from : to); index as n;">
+    <div *ngIf="!(note.technique && note.technique[number] && note.technique[number][note.strings[number]][0] && note.technique[number][note.strings[number]][0].hammer) && hammerFrom(from+n, number)"
+    class="technique-left"
+    [ngStyle]="{
+        top:-(view.note.height/3)+view.page.units,
+        left:(view.note.width/2)+view.page.units,
+        'border-top-left-radius':(view.note.width/2)+view.page.units,
+        width:(view.note.width/2)+view.page.units,
+        height:(view.note.height/3)+view.page.units
+    }"></div>
+    <ng-container *ngIf="note.technique && note.technique[number]">
+        <div *ngIf="(note.technique[number][note.strings[number]][0] && note.technique[number][note.strings[number]][0].hammer) && hammerFrom(n, number)" 
+        class="technique"
+        [ngStyle]="{
+            top:-(view.note.height/3)+view.page.units,
+            left:(0)+view.page.units,
+            width:(view.note.width)+view.page.units,
+            height:(view.note.height/3)+view.page.units
+        }"></div>
+        <div *ngIf="(note.technique[number][note.strings[number]][0] && note.technique[number][note.strings[number]][0].hammer) && !hammerFrom(n, number)" 
+        class="technique-right"
+        [ngStyle]="{
+            top:-(view.note.height/3)+view.page.units,
+            left:(0)+view.page.units,
+            'border-top-right-radius':(view.note.width/2)+view.page.units,
+            width:(view.note.width/2)+view.page.units,
+            height:(view.note.height/3)+view.page.units
+        }"></div>
+    </ng-container>
     <div class="left" [ngStyle]="{height:(view.note.height/2)+view.page.units}">&nbsp;</div>
     <div class="note">
         <span [hidden]="!(view.cursor.note===n+from && view.cursor.string===number && view.focused.tab)"

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { TablatureService } from 'src/app/ui/tablature/tablature.service';
-import { TablatureView, Bend } from 'src/app/ui/tablature/tablature.model';
+import { TablatureView, Bend, Hammer, TablatureCursor } from 'src/app/ui/tablature/tablature.model';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -41,6 +41,24 @@ export class TablatureComponent implements OnInit {
       m ++;
     }
   }
+  addHammerOn(cursor:TablatureCursor, c:TablatureComponent, $e) {
+    var fingering = c.view.tablature.notes[(cursor||c.view.cursor).note].strings[(cursor||c.view.cursor).string];
+    if (!c.view.tablature.notes[(cursor||c.view.cursor).note].technique)
+      c.view.tablature.notes[(cursor||c.view.cursor).note].technique = {};
+    if (!c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string])
+      c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string] = {};
+    if (!c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string][fingering])
+      c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string][fingering] = [];
+    if (!c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string][fingering][0])
+      c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string][fingering].push(
+        new Hammer()
+      );
+    (c.view.tablature.notes[(cursor||c.view.cursor).note].technique[(cursor||c.view.cursor).string][fingering][0] as Hammer).hammer = true;
+
+    if (!c.view.tablature.notes[(cursor||c.view.cursor).note-1].strings[(cursor||c.view.cursor).string])
+        this.addHammerOn({note:(cursor||c.view.cursor).note-1, string:(cursor||c.view.cursor).string} as any, c, $e);
+
+  }
   keyboardActions = {
     "[0-9]":(ctrl:TablatureComponent, $event)=>{
 
@@ -70,6 +88,10 @@ export class TablatureComponent implements OnInit {
         ctrl.keyBuffer = [];
       }
     },
+    "h":(c:TablatureComponent, $e)=>{
+      c.addHammerOn(null, c, $e);
+      this.keyBuffer = [];
+    },
     "b":(c:TablatureComponent, $e)=>{
       this.keyBuffer.push("b");
     },
@@ -80,7 +102,6 @@ export class TablatureComponent implements OnInit {
           c.view.tablature.notes[c.view.cursor.note].technique = {};
         if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string])
           c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string] = {};
-          console.log(c.view.tablature.notes[c.view.cursor.note])
         if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering])
           c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering] = [];
         if (!c.view.tablature.notes[c.view.cursor.note].technique[c.view.cursor.string][fingering][0])

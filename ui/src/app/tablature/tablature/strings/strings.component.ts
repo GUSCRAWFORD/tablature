@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { TablatureView, Chord } from 'src/app/ui/tablature/tablature.model';
 import { TablatureService } from 'src/app/ui/tablature/tablature.service';
 
@@ -6,6 +6,7 @@ import { TablatureService } from 'src/app/ui/tablature/tablature.service';
   selector: 'app-strings',
   templateUrl: './strings.component.html',
   styleUrls: ['./strings.component.scss']
+  //,changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StringsComponent implements OnInit {
 

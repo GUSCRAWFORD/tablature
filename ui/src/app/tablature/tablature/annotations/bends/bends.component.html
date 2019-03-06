@@ -15,20 +15,21 @@
     <ng-container *ngFor="let str of keys(note.technique)">
       <ng-container *ngFor="let fingering of keys(note.technique[str])">
         <ng-container *ngFor="let bend of note.technique[str][fingering]; index as bendNo">
-
-          <span class="text" [ngStyle]="{width:(view.note.width)+view.page.units}">{{bend.strength|bendStrength}}</span>
-          <div class="triangle-up"
-          [ngStyle]="{
-            left:(0.5*view.note.width-2)+view.page.units,
-            top:(.8*view.note.height)+view.page.units
-          }"></div>
-          <div class="inner" [ngStyle]="{
-            width:view.note.width+view.page.units,
-            height:annotationHeight(str, bendNo),
-            'border-bottom-right-radius':view.note.width+view.page.units,
-            'top':(.8*view.note.height)+view.page.units,
-            'left':(-0.5*view.note.width)+view.page.units
-          }"></div>
+          <ng-container *ngIf="bend.strength">
+            <span class="text" [ngStyle]="{width:(view.note.width)+view.page.units}">{{bend.strength|bendStrength}}</span>
+            <div class="triangle-up"
+            [ngStyle]="{
+              left:(0.5*view.note.width-2)+view.page.units,
+              top:(.8*view.note.height)+view.page.units
+            }"></div>
+            <div class="inner" [ngStyle]="{
+              width:view.note.width+view.page.units,
+              height:annotationHeight(str, bendNo),
+              'border-bottom-right-radius':view.note.width+view.page.units,
+              'top':(.8*view.note.height)+view.page.units,
+              'left':(-0.5*view.note.width)+view.page.units
+            }"></div>
+          </ng-container>
         </ng-container>
       </ng-container>
     </ng-container>

@@ -80,3 +80,24 @@
         }
     }
 }
+.technique-left {
+    position: absolute;
+    top:0px;
+    left:0px;
+    border-top:1px solid black;
+    border-left:1px solid black;
+    border-top-left-radius:18px;
+}
+.technique-right {
+    position: absolute;
+    top:0px;
+    left:0px;
+    border-top:1px solid black;
+    border-right:1px solid black;
+    border-top-right-radius:18px;
+}
+.technique {
+    position: absolute;
+    left:0px;
+    border-top:1px solid black;
+}

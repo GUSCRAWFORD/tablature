@@ -43,6 +43,9 @@ export class Technique {
 export class Bend extends Technique {
   strength: number = 0;
 }
+export class Hammer extends Technique {
+  hammer: boolean = false;
+}
 /**
  * 0 or more meaasures of 0 or more strings being played
  * @property notes {Chord[]} The set of all strings and positions in a sequence that may or may not be a song
