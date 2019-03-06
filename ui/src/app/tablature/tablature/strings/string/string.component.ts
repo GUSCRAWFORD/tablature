@@ -40,17 +40,14 @@ export class StringComponent implements OnInit {
   heat(n, s) {
     this.view.hot?this.view.hot.note = n+this.from:null;
     this.view.hot?this.view.hot.string=s:null;
-    this.cd.markForCheck();
-    this.cd.detectChanges();
   }
   cool(n, s) {
     console.log('x');
-    this.view.hot = new TablatureCursor();
-    this.view.hot = {
-      note:this.view.hot.note,
-      string:this.view.hot.string
-    } as any;
-    this.cd.markForCheck();
+    //this.view.hot = new TablatureCursor();
+    // this.view.hot = {
+    //   note:0,
+    //   string:0
+    // } as any;
     this.cd.detectChanges();
   }
   hammerFrom(noteIndex:number, stringNo:number) {
